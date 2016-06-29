@@ -98,24 +98,27 @@
 
             <div class="col-lg-3 col-md-6">
 
-                <div id="test5" class="panel panel-green">
+                <div id="test5" class="panel panel-ready">
 
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-3">
                               <div id ="test3">
-                                <i class="fa fa-smile-o fa-5x"></i>
+                                <i class="glyphicon glyphicon-cog fa-5x"></i>
                             </div>
                           </div>
                             <div class="col-xs-9 text-center">
-                                <div id="test6"class="huge">양호</div>
-                                <div>1번도로</div>
+                                <div id="test6"class="huge">측정</div>
+
                             </div>
                         </div>
                     </div>
-                    <a href="#">
+                    <script>
+
+                    </script>
+                    <a href="#" id="BTN">
                         <div class="panel-footer">
-                            <span class="pull-left">실시간 상황</span>
+                            <span id="test7" class="pull-left">기준치 잡기</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                             <div class="clearfix"></div>
                         </div>
@@ -189,7 +192,55 @@
             var randomColor = function(opacity) {
                 return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',' + (opacity || '.3') + ')';
             };
-            var config = {
+            var config1 = {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [
+                    {
+                        label: "1번 구역",
+                        data: [],
+                        //length:data.length,
+                        lineTension: 0,
+                        fill: false,
+                    }, ]
+                },
+                options: {
+                    responsive: true,
+                    legend: {
+                        position: 'bottom',
+                    },
+                    hover: {
+                        mode: 'label'
+                    },
+                    scales: {
+                        xAxes: [{
+
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'data'
+                            }
+                        }],
+                        yAxes: [{
+                            ticks:{
+                              suggestedMax: 200,
+                              beginAtZero: true
+                            },
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Time'
+                            }
+                        }]
+                    },
+                    title: {
+                        display: true,
+                        text: '1번 도로'
+                    }
+                }
+            };
+            var config2 = {
                 type: 'line',
                 data: {
                     labels: [],
@@ -238,7 +289,7 @@
                 }
             };
 
-            $.each(config.data.datasets, function(i, dataset) {
+            $.each(config1.data.datasets, function(i, dataset) {
                 var background = randomColor(0.5);
                 dataset.borderColor = background;
                 dataset.backgroundColor = background;
@@ -246,7 +297,7 @@
                 dataset.pointBackgroundColor = background;
                 dataset.pointBorderWidth = 1;
             });
-            $.each(config.data.datasets, function(i, dataset) {
+            $.each(config2.data.datasets, function(i, dataset) {
                 var background = randomColor(0.5);
                 dataset.borderColor = background;
                 dataset.backgroundColor = background;
@@ -258,9 +309,9 @@
             window.onload = function() {
                 var ctx = document.getElementById("canvas").getContext("2d");
                 var ctx2 = document.getElementById("canvas2").getContext("2d");
-                window.myLine1 = new Chart(ctx, config);
-                window.myLine2 = new Chart(ctx2, config);
-                console.log(config.data.datasets.data);
+                window.myLine1 = new Chart(ctx, config1);
+                window.myLine2 = new Chart(ctx2, config2);
+                //console.log(config.data.datasets.data);
             };
       </script>
 
@@ -271,75 +322,232 @@
         var check_icon = $("#test3 i");
         var check_color = $("#test5");
         var check_text = $("#test6");
-        socket.on('chat message',function (msg) {
-          console.log("chat message: ",msg);
-          var accdata = msg/100;
-          var count=0;
-          /*
-          if(msg>100){
-            console.log('주의');
-            window.onload = function() {
-                var test2 = document.getElementById("test4");
-                window.alert=
-            };
+        var check_click= $("#BTN");
+        var alert_text = $("#test7");
+        var startbnt=0;
+        var rule1,rule2;
+        var eval1 =0,eval2=0;
+        var count=0;
 
+        socket.on('chat message',function (data4,data5) {
+          console.log("chat message: ",data4,data5);
+          var accdata1 = data4/100;
+          var accdata2 = data5/100;
+
+          check_click.click(function () {
+            startbnt=1;
+            eval1=0;
+            eval2=0;
+            check_color.removeClass("panel-green")
+            check_color.removeClass("panel-yellow")
+            check_color.removeClass("panel-red")
+            check_icon.removeClass("glyphicon glyphicon-cog");
+            check_color.addClass("panel-ready")
+            check_icon.addClass("fa fa-history")
+            alert_text.text("");
+            check_text.text(" 측정 중입니다...");
+            check_text.removeClass("huge");
+            check_text.addClass("huge1");
+
+          });
+          if(startbnt==1){
+
+
+            console.log('count: '+((count/2)+1));
+            if(count==20-2){
+
+              rule1=eval1/(10-1);
+              rule2=eval2/(10-1);
+              console.log("rule1:"+rule1*100+" rule2:"+rule2*100);
+              startbnt=0;
+              count=0;
+            }
           }
-*/
-          if(100<accdata){
-            if(accdata>150){
+
+          if(rule1){
+
+
+          if((rule1+100)<=accdata1||(rule2+100)<=accdata2){
+            if(accdata1>(rule1+150)&&accdata2<(rule2+150)){
               check_text.text("위험");
+              alert_text.text("기준치 측정");
+              check_color.removeClass("panel-ready");
               check_color.removeClass("panel-green");
               check_color.removeClass("panel-yellow");
-              check_icon.removeClass("fa-smile-o");
-              check_icon.removeClass("fa-meh-o");
+              check_icon.removeClass("fa fa-history");
+              check_icon.removeClass("glyphicon glyphicon-cog");
+              check_icon.removeClass("fa fa-smile-o");
+              check_icon.removeClass("fa fa-meh-o");
               check_color.addClass("panel-red");
-              check_icon.addClass("fa-frown-o");
+              check_icon.addClass("fa fa-frown-o");
+              console.log("1번 도로 위험!!");
             }
-            else{
-              check_text.text("주의");
+            if(accdata1<=(rule1+150)&&accdata2>=(rule2+150)){
+              check_text.text("위험");
+              alert_text.text("기준치 측정");
+              check_color.removeClass("panel-ready");
               check_color.removeClass("panel-green");
               check_color.removeClass("panel-yellow");
-              check_icon.removeClass("fa-smile-o");
-              check_icon.removeClass("fa-frown-o");
+              check_icon.removeClass("fa fa-history");
+              check_icon.removeClass("glyphicon glyphicon-cog");
+              check_icon.removeClass("fa fa-smile-o");
+              check_icon.removeClass("fa fa-meh-o");
+              check_color.addClass("panel-red");
+              check_icon.addClass("fa fa-frown-o");
+              console.log("2번 도로 위험!!");
+            }
+            if(accdata1>=(rule1+150)&&accdata2>=(rule2+150)){
+              check_text.text("위험");
+              alert_text.text("기준치 측정");
+              check_color.removeClass("panel-ready");
+              check_color.removeClass("panel-green");
+              check_color.removeClass("panel-yellow");
+              check_icon.removeClass("fa fa-history");
+              check_icon.removeClass("glyphicon glyphicon-cog");
+              check_icon.removeClass("fa fa-smile-o");
+              check_icon.removeClass("fa fa-meh-o");
+              check_color.addClass("panel-red");
+              check_icon.addClass("fa fa-frown-o");
+              console.log("1번 도로 2번 도로 위험!!");
+            }
+            else if(accdata1>=(rule1+100)&&accdata1<=(rule1+150)&&accdata2>=(rule2+100)&&accdata2<=(rule2+150)){
+              check_text.text("주의");
+              alert_text.text("기준치 측정");
+              check_color.removeClass("panel-ready");
+              check_color.removeClass("panel-green");
+              check_color.removeClass("panel-yellow");
+              check_icon.removeClass("fa fa-history");
+              check_icon.removeClass("glyphicon glyphicon-cog");
+              check_icon.removeClass("fa fa-smile-o");
+              check_icon.removeClass("fa fa-frown-o");
               check_color.addClass("panel-yellow");
-              check_icon.addClass("fa-meh-o");
+              check_icon.addClass("fa fa-meh-o");
+              console.log("1번 도로 2번 도로 주의!");
+            }
+            else if(accdata1>=(rule1+100)&&accdata1<=(rule1+150)&&accdata2<=(rule2+100)){
+              check_text.text("주의");
+              alert_text.text("기준치 측정");
+              check_color.removeClass("panel-ready");
+              check_color.removeClass("panel-green");
+              check_color.removeClass("panel-yellow");
+              check_icon.removeClass("fa fa-history");
+              check_icon.removeClass("glyphicon glyphicon-cog");
+              check_icon.removeClass("fa fa-smile-o");
+              check_icon.removeClass("fa fa-frown-o");
+              check_color.addClass("panel-yellow");
+              check_icon.addClass("fa fa-meh-o");
+              console.log("1번 도로 주의!");
+            }
+            else if(accdata1<=(rule1+100)&&accdata2>=(rule2+100)&&accdata2<=(rule2+150)){
+              check_text.text("주의");
+              alert_text.text("기준치 측정");
+              check_color.removeClass("panel-ready");
+              check_color.removeClass("panel-green");
+              check_color.removeClass("panel-yellow");
+              check_icon.removeClass("fa fa-history");
+              check_icon.removeClass("glyphicon glyphicon-cog");
+              check_icon.removeClass("fa fa-smile-o");
+              check_icon.removeClass("fa fa-frown-o");
+              check_color.addClass("panel-yellow");
+              check_icon.addClass("fa fa-meh-o");
+              console.log("2번 도로 주의!");
             }
           }
-          else
+          else if((rule1+100)>=accdata1&&(rule2+100)>=accdata2)
           {
             check_text.text("양호");
+            alert_text.text("기준치 측정");
+            check_text.removeClass("huge1");
+            check_text.addClass("huge");
+            check_color.removeClass("panel-ready");
             check_color.removeClass("panel-yellow");
             check_color.removeClass("panel-red");
-            check_icon.removeClass("fa-meh-o");
-            check_icon.removeClass("fa-frown-o");
+            check_icon.removeClass("fa fa-history");
+            check_icon.removeClass("glyphicon glyphicon-cog");
+            check_icon.removeClass("fa fa-meh-o");
+            check_icon.removeClass("fa fa-frown-o");
             check_color.addClass("panel-green");
-            check_icon.addClass("fa-smile-o");
+            check_icon.addClass("fa fa-smile-o");
           }
-          if (config.data.datasets.length > 0) {
+          }
+
+          if (config1.data.datasets.length > 0) {
+
               var now = new Date();
               var hour = now.getHours();
               var min = now.getMinutes();
               var second = now.getSeconds();
-              config.data.labels.push(hour+":"+min+":"+second);
+              config1.data.labels.push(hour+":"+min+":"+second);
 
-              if(config.data.labels.length==21){
-                $.each(config.data.datasets, function(i, dataset) {
-                    config.data.labels.shift(0,21);
+              if(config1.data.labels.length==21){
+                $.each(config1.data.datasets, function(i, dataset) {
+                    config1.data.labels.shift(0,21);
                     dataset.data.shift(0,20);
-                    dataset.data.push(accdata);
+                    if(startbnt==1){
+                      count+=1;
+                      eval1+=accdata1;
+                      dataset.data.push(accdata1);
+                    }
+                    else{
+                    dataset.data.push(accdata1);
+                    }
                 });
               }
               else{
-              $.each(config.data.datasets, function(i, dataset) {
-                  dataset.data.push(accdata);
+
+              $.each(config1.data.datasets, function(i, dataset) {
+                if(startbnt==1){
+                  count+=1;
+                  eval1+=accdata1;
+                  dataset.data.push(accdata1);
+                }
+                else{
+                  dataset.data.push(accdata1);
+                }
               });
             }
 
               window.myLine1.update();
+          }
+          if (config2.data.datasets.length > 0) {
+
+              var now = new Date();
+              var hour = now.getHours();
+              var min = now.getMinutes();
+              var second = now.getSeconds();
+              config2.data.labels.push(hour+":"+min+":"+second);
+
+              if(config2.data.labels.length==21){
+                $.each(config2.data.datasets, function(i, dataset) {
+                    config2.data.labels.shift(0,21);
+                    dataset.data.shift(0,20);
+                    if(startbnt==1){
+                      count+=1;
+                      eval2+=accdata2;
+                      dataset.data.push(accdata2);
+                    }
+                    else{
+                    dataset.data.push(accdata2);
+                    }
+                });
+              }
+              else{
+
+              $.each(config2.data.datasets, function(i, dataset) {
+                if(startbnt==1){
+                  count+=1;
+                  eval2+=accdata2;
+                  dataset.data.push(accdata2);
+                }
+                else{
+                  dataset.data.push(accdata2);
+                }
+              });
+            }
+
               window.myLine2.update();
           }
-        });
-
+});
 
 
         </script>

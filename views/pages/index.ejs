@@ -9,38 +9,40 @@
     </script>
 
     <script>
-        var organization = new google.maps.LatLng(36.1290870,128.1874104);
+        var organization1 = new google.maps.LatLng(36.1290870,128.1874104);
 
-        function HomeControl(controlDiv,map) {
-            controlDiv.style.padding='5px';
 
-            var controlUI= document.createElement('div');
-            controlUI.style.backgroundColor='white';
-            controlUI.style.border='1px';
-            controlUI.style.cursor='pointer';
-            controlUI.style.textAlign='center';
-            controlUI.title =' set map to Home';
-            controlDiv.appendChild(controlUI);
+        function HomeControl1(controlDiv1,map1) {
+            controlDiv1.style.padding='5px';
 
-            var controlText = document.createElement('div');
-            controlText.style.fontFamily='Arial.sans-serif';
-            controlText.style.fontSize='12px';
-            controlText.style.paddingLeft='4px';
-            controlText.style.paddingRight='4px';
-            controlText.innerHTML ='<b>한국 도로공사 본사<b>'
-            controlUI.appendChild(controlText);
+            var controlUI1= document.createElement('div');
+            controlUI1.style.backgroundColor='white';
+            controlUI1.style.border='1px';
+            controlUI1.style.cursor='pointer';
+            controlUI1.style.textAlign='center';
+            controlUI1.title =' set map to Home';
+            controlDiv1.appendChild(controlUI1);
 
-            google.maps.event.addDomListener(controlUI,'click',function () {
-                map.setCenter(organization,36.1290870,128.1874104)
+            var controlText1 = document.createElement('div');
+            controlText1.style.fontFamily='Arial.sans-serif';
+            controlText1.style.fontSize='12px';
+            controlText1.style.paddingLeft='4px';
+            controlText1.style.paddingRight='4px';
+            controlText1.innerHTML ='<b>한국 도로공사 본사<b>'
+            controlUI1.appendChild(controlText1);
+
+            google.maps.event.addDomListener(controlUI1,'click',function () {
+                map1.setCenter(organization1,36.1290870,128.1874104)
             });
         }
 
+
         function initialize() {
 
-            var mapDiv = document.getElementById('googleMap');
-            var mapDiv2 = document.getElementById('googleMap2');
-            var mapProp={
-                center:organization,
+            var mapDiv1 = document.getElementById('googleMap');
+
+            var mapProp1={
+                center:organization1,
                 zoom:15,
                 zoomControl:true,
                 zoomControlOptions: {
@@ -50,32 +52,35 @@
                 mapTypeId:google.maps.MapTypeId.ROADMAP
             };
 
-            var map = new google.maps.Map(mapDiv,mapProp);
-            var map2 = new google.maps.Map(mapDiv2,mapProp)
+            var map1 = new google.maps.Map(mapDiv1,mapProp1);
+
             //홈 컨트롤
-            var HomeControlDiv = document.createElement('div');
-            var homeControl = new HomeControl(HomeControlDiv,map);
+            var HomeControlDiv1 = document.createElement('div');
+
+            var homeControl1 = new HomeControl1(HomeControlDiv1,map1);
+
             //homeControlDiv.index = 1;
-            map.controls[google.maps.ControlPosition.TOP_RIGHT].push(HomeControlDiv);
+            map1.controls[google.maps.ControlPosition.TOP_RIGHT].push(HomeControlDiv1);
+
 
             //마커
-            var marker = new google.maps.Marker({
-                position : organization,
+            var marker1 = new google.maps.Marker({
+                position : organization1,
                 //animation:google.maps.Animation.BOUNCE
             });
 
-            marker.setMap(map);
-              marker.setMap(map2);
+            marker1.setMap(map1);
 
-            var infowindow = new google.maps.InfoWindow({
+
+            var infowindow1 = new google.maps.InfoWindow({
                 content:"<b>한국 도로공사 본사<b>"
             });
 
-            infowindow.open(map,marker);
+
+            infowindow1.open(map1,marker1);
 
 
         }
-
 
         google.maps.event.addDomListener(window, 'load', initialize);
     </script>
@@ -95,7 +100,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand">KongTech</a>
+                <a class="navbar-brand"><img src="./img/kongtech-logo.png" width="100px"</img></a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">

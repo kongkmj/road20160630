@@ -1,0 +1,628 @@
+<div id="page-wrapper">
+
+  <!-- Page Heading -->
+          <div class="row">
+              <div class="col-lg-12">
+                  <h1 class="page-header">
+                      Beacon 설정
+                  </h1>
+                  <ol class="breadcrumb">
+                      <li class="active">
+                          <i class="fa fa-gaer"></i> 설정
+                      </li>
+                  </ol>
+              </div>
+          </div>
+<div >
+<h5>(1)번 Beacon</h5>
+
+
+<form id="ruleform1" name="ruleform1" method="POST" action="/input1">
+<h5>기준값:
+<button type ="button" class="btn btn-primary" id="ruleid1" name="ruleid1" value="on" onclick="rule1()">기준값 적용</button> <!--버튼 사이즈는 bootstrap.css:3005-->
+<input type="hidden" id="rule1_1" name=rule1_1 value=""/>
+<script>
+function rule1() {
+var a =document.getElementById("ruleid1");
+console.log(a);
+var b =document.getElementById("rule1_1");
+console.log(b);
+b.value = a.value;
+var c= b.value;
+console.log(c);
+alert("기준값을 적용하였습니다.");
+}
+</script>
+<i class=" fa fa-long-arrow-right"></i>
+
+<%= data.rule1 %>
+</h5>
+<div id="test">
+
+</div>
+
+<div class="form-group">
+
+  <div>
+    <h5>
+    민감도 :
+    <button type ="button" class="btn btn-success" id="range1-1" name="range1-1" value="매우민감" onclick="level1_1()">매우민감</button>
+    <button type="button" class="btn btn-info"  id="range1-2" name="range1-2" value="민감" onclick="level1_2()">민감</button>
+    <button type ="button" class="btn btn-primary" id="range1-3" name="range1-3" value="보통" onclick="level1_3()">보통</button>
+    <button type ="button" class="btn btn-warning" id="range1-4" name="range1-4" value="둔감" onclick="level1_4()">둔감</button>
+    <button type ="button" class="btn btn-danger" id="range1-5" name="range1-5" value="매우둔감" onclick="level1_5()">매우둔감</button>
+    <button type ="button" class="btn btn-default" id="range1-submit" name="range1-submit" value="전송" onclick="sub1()">전송</button>
+    <input type="hidden" id="range1-6" name=range1 value=""/>
+  </div>
+
+  </h5>
+  </form>
+  <script>
+
+  function level1_1() {
+  if($("#range1-6").val()!=""){
+    alert("민감도는 하나만 선택 할 수 있습니다.");
+  }
+  else{
+  var a =document.getElementById("range1-1");
+  var b =document.getElementById("range1-6");
+  b.value = a.value;
+  var c= b.value;
+  console.log(c);
+  }
+  }
+  function level1_2() {
+    if($("#range1-6").val()!=""){
+      alert("민감도는 하나만 선택 할 수 있습니다.");
+    }
+    else{
+  var a =document.getElementById("range1-2");
+  var b =document.getElementById("range1-6");
+  b.value = a.value;
+  var c= b.value;
+  console.log(c);
+}
+  }
+  function level1_3() {
+    if($("#range1-6").val()!=""){
+      alert("민감도는 하나만 선택 할 수 있습니다.");
+    }
+    else{
+  var a =document.getElementById("range1-3");
+  var b =document.getElementById("range1-6");
+  b.value = a.value;
+  var c= b.value;
+  console.log(c);
+}
+}
+function level1_4() {
+  if($("#range1-6").val()!=""){
+    alert("민감도는 하나만 선택 할 수 있습니다.");
+  }
+  else{
+  var a =document.getElementById("range1-4");
+  var b =document.getElementById("range1-6");
+  b.value = a.value;
+  var c= b.value;
+  console.log(c);
+  }
+}
+  function level1_5() {
+    if($("#range1-6").val()!=""){
+      alert("민감도는 하나만 선택 할 수 있습니다.");
+    }
+    else{
+  var a =document.getElementById("range1-5");
+  var b =document.getElementById("range1-6");
+  b.value = a.value;
+  var c= b.value;
+  console.log(c);
+}
+  }
+  function sub1() {
+    if($("#range1-6").val()==""){
+      alert("민감도를 적용하시오");
+    }
+    else{
+    document.getElementById("ruleform1").submit();
+  }
+  }
+  </script>
+  <!--
+    <%=data.range1%>
+  -->
+    </div>
+  </div>
+
+  <div >
+  <h5>(2)번 Beacon</h5>
+
+  <form id="ruleform2" name="ruleform2" method="POST" action="/input2">
+  <h5>기준값:
+  <button type ="button" class="btn btn-primary" id="ruleid2" name="ruleid2" value="on" onclick="rule2()">기준값 적용</button> <!--버튼 사이즈는 bootstrap.css:3005-->
+  <input type="hidden" id="rule2_1" name=rule2_1 value=""/>
+  <script>
+  function rule2() {
+  var a =document.getElementById("ruleid2");
+  console.log(a);
+  var b =document.getElementById("rule2_1");
+  console.log(b);
+  b.value = a.value;
+  var c= b.value;
+  console.log(c);
+  alert("기준값을 적용하였습니다.");
+  }
+  </script>
+  <i class=" fa fa-long-arrow-right"></i>
+
+  <%= data_2.rule2 %>
+  </h5>
+  <div id="test">
+
+  </div>
+
+  <div class="form-group">
+
+    <div>
+      <h5>
+      민감도 :
+      <button type ="button" class="btn btn-primary" id="range2-1" name="range2-1" value="매우민감" onclick="level2_1()">매우민감</button>
+      <button type="button" class="btn btn-primary"  id="range2-2" name="range2-2" value="민감" onclick="level2_2()">민감</button>
+      <button type ="button" class="btn btn-primary" id="range2-3" name="range2-3" value="보통" onclick="level2_3()">보통</button>
+      <button type ="button" class="btn btn-primary" id="range2-4" name="range2-4" value="둔감" onclick="level2_4()">둔감</button>
+      <button type ="button" class="btn btn-primary" id="range2-5" name="range2-5" value="매우둔감" onclick="level2_5()">매우둔감</button>
+      <button type ="button" class="btn btn-primary" id="range2-submit" name="range2-submit" value="전송" onclick="sub2()">전송</button>
+      <input type="hidden" id="range2-6" name=range2 value=""/>
+    </div>
+
+    </h5>
+    </form>
+    <script>
+    function level2_1() {
+      if($("#range2-6").val()!=""){
+        alert("민감도는 하나만 선택 할 수 있습니다.");
+      }
+      else{
+    var a =document.getElementById("range2-1");
+    var b =document.getElementById("range2-6");
+    b.value = a.value;
+    var c= b.value;
+    console.log(c);
+  }
+    }
+    function level2_2() {
+      if($("#range2-6").val()!=""){
+        alert("민감도는 하나만 선택 할 수 있습니다.");
+      }
+      else{
+    var a =document.getElementById("range2-2");
+    var b =document.getElementById("range2-6");
+    b.value = a.value;
+    var c= b.value;
+    console.log(c);
+  }
+    }
+    function level2_3() {
+      if($("#range2-6").val()!=""){
+        alert("민감도는 하나만 선택 할 수 있습니다.");
+      }
+      else{
+    var a =document.getElementById("range2-3");
+    var b =document.getElementById("range2-6");
+    b.value = a.value;
+    var c= b.value;
+    console.log(c);
+  }
+  }
+  function level2_4() {
+    if($("#range2-6").val()!=""){
+      alert("민감도는 하나만 선택 할 수 있습니다.");
+    }
+    else{
+    var a =document.getElementById("range2-4");
+    var b =document.getElementById("range2-6");
+    b.value = a.value;
+    var c= b.value;
+    console.log(c);
+  }
+    }
+    function level2_5() {
+      if($("#range2-6").val()!=""){
+        alert("민감도는 하나만 선택 할 수 있습니다.");
+      }
+      else{
+    var a =document.getElementById("range2-5");
+    var b =document.getElementById("range2-6");
+    b.value = a.value;
+    var c= b.value;
+    console.log(c);
+  }
+    }
+    function sub2() {
+      if($("#range2-6").val()==""){
+        alert("민감도를 적용하시오");
+      }
+      else{
+      document.getElementById("ruleform2").submit();
+    }
+    }
+    </script>
+    <!--
+      <%=data.range2%>
+    -->
+      </div>
+    </div>
+
+
+    <div >
+      <h5>(3)번 Beacon</h5>
+
+      <form id="ruleform3" name="ruleform3" method="POST" action="/input3">
+      <h5>기준값:
+      <button type ="button" class="btn btn-primary" id="ruleid3" name="ruleid3" value="on" onclick="rule3()">기준값 적용</button> <!--버튼 사이즈는 bootstrap.css:3005-->
+      <input type="hidden" id="rule3_1" name=rule3_1 value=""/>
+      <script>
+      function rule3() {
+      var a =document.getElementById("ruleid3");
+      console.log(a);
+      var b =document.getElementById("rule3_1");
+      console.log(b);
+      b.value = a.value;
+      var c= b.value;
+      console.log(c);
+      alert("기준값을 적용하였습니다.");
+      }
+      </script>
+      <i class=" fa fa-long-arrow-right"></i>
+
+      <%= data_3.rule3 %>
+      </h5>
+    <div id="test">
+
+    </div>
+
+    <div class="form-group">
+
+      <div>
+        <h5>
+        민감도 :
+        <button type ="button" class="btn btn-primary" id="range3-1" name="range3-1" value="매우민감" onclick="level3_1()">매우민감</button>
+        <button type="button" class="btn btn-primary"  id="range3-2" name="range3-2" value="민감" onclick="level3_2()">민감</button>
+        <button type ="button" class="btn btn-primary" id="range3-3" name="range3-3" value="보통" onclick="level3_3()">보통</button>
+        <button type ="button" class="btn btn-primary" id="range3-4" name="range3-4" value="둔감" onclick="level3_4()">둔감</button>
+        <button type ="button" class="btn btn-primary" id="range3-5" name="range3-5" value="매우둔감" onclick="level3_5()">매우둔감</button>
+        <button type ="button" class="btn btn-primary" id="range3-submit" name="range3-submit" value="전송" onclick="sub3()">전송</button>
+        <input type="hidden" id="range3-6" name=range3 value=""/>
+      </div>
+
+      </h5>
+      </form>
+      <script>
+      function level3_1() {
+        if($("#range3-6").val()!=""){
+          alert("민감도는 하나만 선택 할 수 있습니다.");
+        }
+        else{
+      var a =document.getElementById("range3-1");
+      var b =document.getElementById("range3-6");
+      b.value = a.value;
+      var c= b.value;
+      console.log(c);
+    }
+      }
+      function level3_2() {
+        if($("#range3-6").val()!=""){
+          alert("민감도는 하나만 선택 할 수 있습니다.");
+        }
+        else{
+      var a =document.getElementById("range3-2");
+      var b =document.getElementById("range3-6");
+      b.value = a.value;
+      var c= b.value;
+      console.log(c);
+    }
+      }
+      function level3_3() {
+        if($("#range3-6").val()!=""){
+          alert("민감도는 하나만 선택 할 수 있습니다.");
+        }
+        else{
+      var a =document.getElementById("range3-3");
+      var b =document.getElementById("range3-6");
+      b.value = a.value;
+      var c= b.value;
+      console.log(c);
+    }
+    }
+    function level3_4() {
+      if($("#range3-6").val()!=""){
+        alert("민감도는 하나만 선택 할 수 있습니다.");
+      }
+      else{
+      var a =document.getElementById("range3-4");
+      var b =document.getElementById("range3-6");
+      b.value = a.value;
+      var c= b.value;
+      console.log(c);
+    }
+      }
+      function level3_5() {
+        if($("#range3-6").val()!=""){
+          alert("민감도는 하나만 선택 할 수 있습니다.");
+        }
+        else{
+      var a =document.getElementById("range3-5");
+      var b =document.getElementById("range3-6");
+      b.value = a.value;
+      var c= b.value;
+      console.log(c);
+    }
+      }
+      function sub3() {
+        if($("#range1-6").val()==""){
+          alert("민감도를 적용하시오");
+        }
+        else{
+        document.getElementById("ruleform3").submit();
+      }
+      }
+      </script>
+      <!--
+        <%=data.range3%>
+      -->
+        </div>
+      </div>
+
+
+
+      <div >
+      <h5>(4)번 Beacon</h5>
+
+      <form id="ruleform4" name="ruleform4" method="POST" action="/input4">
+      <h5>기준값:
+      <button type ="button" class="btn btn-primary" id="ruleid4" name="ruleid4" value="on" onclick="rule4()">기준값 적용</button> <!--버튼 사이즈는 bootstrap.css:3005-->
+      <input type="hidden" id="rule4_1" name=rule4_1 value=""/>
+      <script>
+      function rule4() {
+      var a =document.getElementById("ruleid4");
+      console.log(a);
+      var b =document.getElementById("rule4_1");
+      console.log(b);
+      b.value = a.value;
+      var c= b.value;
+      console.log(c);
+      alert("기준값을 적용하였습니다.");
+      }
+      </script>
+      <i class=" fa fa-long-arrow-right"></i>
+
+      <%= data_4.rule4 %>
+      </h5>
+      <div id="test">
+
+      </div>
+
+      <div class="form-group">
+
+        <div>
+          <h5>
+          민감도 :
+          <button type ="button" class="btn btn-primary" id="range4-1" name="range4-1" value="매우민감" onclick="level4_1()">매우민감</button>
+          <button type="button" class="btn btn-primary"  id="range4-2" name="range4-2" value="민감" onclick="level4_2()">민감</button>
+          <button type ="button" class="btn btn-primary" id="range4-3" name="range4-3" value="보통" onclick="level4_3()">보통</button>
+          <button type ="button" class="btn btn-primary" id="range4-4" name="range4-4" value="둔감" onclick="level4_4()">둔감</button>
+          <button type ="button" class="btn btn-primary" id="range4-5" name="range4-5" value="매우둔감" onclick="level4_5()">매우둔감</button>
+          <button type ="button" class="btn btn-primary" id="range4-submit" name="range4-submit" value="전송" onclick="sub4()">전송</button>
+          <input type="hidden" id="range4-6" name=range4 value=""/>
+        </div>
+
+        </h5>
+        </form>
+        <script>
+        function level4_1() {
+          if($("#range4-6").val()!=""){
+            alert("민감도는 하나만 선택 할 수 있습니다.");
+          }
+          else{
+        var a =document.getElementById("range4-1");
+        var b =document.getElementById("range4-6");
+        b.value = a.value;
+        var c= b.value;
+        console.log(c);
+      }
+        }
+        function level4_2() {
+          if($("#range4-6").val()!=""){
+            alert("민감도는 하나만 선택 할 수 있습니다.");
+          }
+          else{
+        var a =document.getElementById("range4-2");
+        var b =document.getElementById("range4-6");
+        b.value = a.value;
+        var c= b.value;
+        console.log(c);
+      }
+        }
+        function level4_3() {
+          if($("#range4-6").val()!=""){
+            alert("민감도는 하나만 선택 할 수 있습니다.");
+          }
+          else{
+        var a =document.getElementById("range4-3");
+        var b =document.getElementById("range4-6");
+        b.value = a.value;
+        var c= b.value;
+        console.log(c);
+      }
+      }
+      function level4_4() {
+        if($("#range4-6").val()!=""){
+          alert("민감도는 하나만 선택 할 수 있습니다.");
+        }
+        else{
+        var a =document.getElementById("range4-4");
+        var b =document.getElementById("range4-6");
+        b.value = a.value;
+        var c= b.value;
+        console.log(c);
+      }
+        }
+        function level4_5() {
+          if($("#range4-6").val()!=""){
+            alert("민감도는 하나만 선택 할 수 있습니다.");
+          }
+          else{
+        var a =document.getElementById("range4-5");
+        var b =document.getElementById("range4-6");
+        b.value = a.value;
+        var c= b.value;
+        console.log(c);
+      }
+        }
+        function sub4() {
+          if($("#range1-6").val()==""){
+            alert("민감도를 적용하시오");
+          }
+          else{
+          document.getElementById("ruleform4").submit();
+        }
+        }
+        </script>
+        <!--
+          <%=data.range4%>
+        -->
+          </div>
+        </div>
+
+
+        <div >
+        <h5>(5)번 Beacon</h5>
+
+        <form id="ruleform5" name="ruleform5" method="POST" action="/input5">
+        <h5>기준값:
+        <button type ="button" class="btn btn-primary" id="ruleid5" name="ruleid5" value="on" onclick="rule5()">기준값 적용</button> <!--버튼 사이즈는 bootstrap.css:3005-->
+        <input type="hidden" id="rule5_1" name=rule5_1 value=""/>
+        <script>
+        function rule5() {
+        var a =document.getElementById("ruleid5");
+        console.log(a);
+        var b =document.getElementById("rule5_1");
+        console.log(b);
+        b.value = a.value;
+        var c= b.value;
+        console.log(c);
+        alert("기준값을 적용하였습니다.");
+        }
+        </script>
+        <i class=" fa fa-long-arrow-right"></i>
+
+        <%= data_5.rule5 %>
+        </h5>
+        <div id="test">
+
+        </div>
+
+        <div class="form-group">
+
+          <div>
+            <h5>
+            민감도 :
+            <button type ="button" class="btn btn-primary" id="range5-1" name="range5-1" value="매우민감" onclick="level5_1()">매우민감</button>
+            <button type="button" class="btn btn-primary"  id="range5-2" name="range5-2" value="민감" onclick="level5_2()">민감</button>
+            <button type ="button" class="btn btn-primary" id="range5-3" name="range5-3" value="보통" onclick="level5_3()">보통</button>
+            <button type ="button" class="btn btn-primary" id="range5-4" name="range5-4" value="둔감" onclick="level5_4()">둔감</button>
+            <button type ="button" class="btn btn-primary" id="range5-5" name="range5-5" value="매우둔감" onclick="level5_5()">매우둔감</button>
+            <button type ="button" class="btn btn-primary" id="range5-submit" name="range5-submit" value="전송" onclick="sub5()">전송</button>
+            <input type="hidden" id="range5-6" name=range5 value=""/>
+          </div>
+
+          </h5>
+          </form>
+          <script>
+          function level5_1() {
+            if($("#range5-6").val()!=""){
+              alert("민감도는 하나만 선택 할 수 있습니다.");
+            }
+            else{
+          var a =document.getElementById("range5-1");
+          var b =document.getElementById("range5-6");
+          b.value = a.value;
+          var c= b.value;
+          console.log(c);
+        }
+          }
+          function level5_2() {
+            if($("#range5-6").val()!=""){
+              alert("민감도는 하나만 선택 할 수 있습니다.");
+            }
+            else{
+          var a =document.getElementById("range5-2");
+          var b =document.getElementById("range5-6");
+          b.value = a.value;
+          var c= b.value;
+          console.log(c);
+        }
+          }
+          function level5_3() {
+            if($("#range5-6").val()!=""){
+              alert("민감도는 하나만 선택 할 수 있습니다.");
+            }
+            else{
+          var a =document.getElementById("range5-3");
+          var b =document.getElementById("range5-6");
+          b.value = a.value;
+          var c= b.value;
+          console.log(c);
+        }
+        }
+        function level5_4() {
+          if($("#range5-6").val()!=""){
+            alert("민감도는 하나만 선택 할 수 있습니다.");
+          }
+          else{
+          var a =document.getElementById("range5-4");
+          var b =document.getElementById("range5-6");
+          b.value = a.value;
+          var c= b.value;
+          console.log(c);
+        }
+          }
+          function level5_5() {
+            if($("#range5-6").val()!=""){
+              alert("민감도는 하나만 선택 할 수 있습니다.");
+            }
+            else{
+          var a =document.getElementById("range5-5");
+          var b =document.getElementById("range5-6");
+          b.value = a.value;
+          var c= b.value;
+          console.log(c);
+        }
+          }
+          function sub5() {
+            if($("#range1-6").val()==""){
+              alert("민감도를 적용하시오");
+            }
+            else{
+            document.getElementById("ruleform5").submit();
+          }
+          }
+          </script>
+          <!--
+            <%=data.range5%>
+          -->
+            </div>
+          </div>
+<!--
+<script src="/socket.io/socket.io.js"></script>
+<script>
+var socket = io.connect("http://localhost:3000");
+socket.on('test',function (data_1) {
+  console.log("chat message: ",data_1);
+ //$("#test").text("data: "+data_1)
+});
+</script>
+-->
+
+<!-- /#page-wrapper -->
+</div>
