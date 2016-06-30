@@ -24,18 +24,33 @@ var server = net.createServer(function (socket) {
   rule1.find({}).sort('-createdAt').exec(function (err, r1) {
 
       r11=r1[0];
+      if(r11==undefined){
+      r11={rule1:"100",range1:"매우민감"};
+      }
       rule2.find({}).sort('-createdAt').exec(function (err, r2) {
 
           r21=r2[0];
+          if(r21==undefined){
+          r21={rule2:"100",range2:"매우민감"};
+          }
           rule3.find({}).sort('-createdAt').exec(function (err, r3) {
 
               r31=r3[0];
+              if(r31==undefined){
+              r31={rule3:"100",range3:"매우민감"};
+              }
               rule4.find({}).sort('-createdAt').exec(function (err, r4) {
 
                   r41=r4[0];
+                  if(r41==undefined){
+                  r41={rule4:"100",range4:"매우민감"};
+                  }
                   rule5.find({}).sort('-createdAt').exec(function (err, r5) {
 
                       r51=r5[0];
+                      if(r51==undefined){
+                      r51={rule5:"100",range5:"매우민감"};
+                      }
                     });
                 });
             });
@@ -369,7 +384,7 @@ server.listen(11111,function () {
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-mongoose.connect("mongodb://test:test@ds023664.mlab.com:23664/roadtest");
+mongoose.connect("mongodb://test:test@ds011495.mlab.com:11495/dbtest");
 var db = mongoose.connection;
 db.once("open",function () {
   console.log("DB connected");
@@ -449,7 +464,23 @@ app.get('/input',function (req,res) {
                     r21=r2[0];
                     r31=r3[0];
                     r41=r4[0];
-                      r51=r5[0];
+                    r51=r5[0];
+                    if(r11==undefined){
+                    r11={rule1:"100",range1:"매우민감"};
+                    }
+                    if(r21==undefined){
+                    r21={rule2:"100",range2:"매우민감"};
+                    }
+                    if(r31==undefined){
+                    r31={rule3:"100",range3:"매우민감"};
+                    }
+                    if(r41==undefined){
+                    r41={rule4:"100",range4:"매우민감"};
+                    }
+                    if(r51==undefined){
+                    r51={rule5:"100",range5:"매우민감"};
+                    }
+
                           res.render("input",{data:r11,data_2:r21,data_3:r31,data_4:r41,data_5:r51});
                     });
                 });
@@ -648,6 +679,9 @@ app.get('/realtimechart-1',function (req,res) {
 
       rule1.find({}).sort('-createdAt').exec(function (err, r1) {
           r11=r1[0];
+          if(r11==undefined){
+            r11={rule1:"100",range1:"매우민감"};
+          }
           beacon1.find({}).sort('-createdAt').exec(function (err, bc1) {
                 if (err) return res.json({success: false, message: err});
                   res.render("realtimechart-1", {data:bc1,data2:r11,data3:a});
@@ -663,60 +697,64 @@ app.get('/realtimechart-1',function (req,res) {
 app.get('/realtimechart-2',function (req,res) {
   //console.log(r21);
 
-  alaram1.findOne({id:1}).sort('-createdAt').exec(function (err,a) {
   rule2.find({}).sort('-createdAt').exec(function (err, r2) {
       r21=r2[0];
+      if(r21==undefined){
+        r21={rule2:"100",range2:"매우민감"};
+      }
       beacon2.find({}).sort('-createdAt').exec(function (err, bc2) {
             if (err) return res.json({success: false, message: err});
-              res.render("realtimechart-2", {data:bc2,data2:r21,data3:a});
+              res.render("realtimechart-2", {data:bc2,data2:r21});
           });
-    });
 
 });
 });
 app.get('/realtimechart-3',function (req,res) {
   //console.log(r31);
 
-  alaram1.findOne({id:1}).sort('-createdAt').exec(function (err,a) {
   rule3.find({}).sort('-createdAt').exec(function (err, r3) {
       r31=r3[0];
+      if(r31==undefined){
+        r31={rule3:"100",range3:"매우민감"};
+      }
       beacon3.find({}).sort('-createdAt').exec(function (err, bc3) {
             if (err) return res.json({success: false, message: err});
-              res.render("realtimechart-3", {data:bc3,data2:r31,data3:a});
+              res.render("realtimechart-3", {data:bc3,data2:r31});
           });
-    });
 
 });
 });
 app.get('/realtimechart-4',function (req,res) {
   //console.log(r41);
 
-  alaram1.findOne({id:1}).sort('-createdAt').exec(function (err,a) {
   rule4.find({}).sort('-createdAt').exec(function (err, r4) {
       r41=r4[0];
+      if(r41==undefined){
+        r41={rule4:"100",range4:"매우민감"};
+      }
       beacon4.find({}).sort('-createdAt').exec(function (err, bc4) {
             if (err) return res.json({success: false, message: err});
-              res.render("realtimechart-4", {data:bc4,data2:r41,data3:a});
+              res.render("realtimechart-4", {data:bc4,data2:r41});
           });
-    });
 
 });
 });
 app.get('/realtimechart-5',function (req,res) {
   //console.log(r51);
-  alaram1.findOne({id:1}).sort('-createdAt').exec(function (err,a) {
   rule5.find({}).sort('-createdAt').exec(function (err, r5) {
       r51=r5[0];
+      if(r51==undefined){
+        r51={rule5:"100",range5:"매우민감"};
+      }
       beacon5.find({}).sort('-createdAt').exec(function (err, bc5) {
             if (err) return res.json({success: false, message: err});
-              res.render("realtimechart-5", {data:bc5,data2:r51,data3:a});
+              res.render("realtimechart-5", {data:bc5,data2:r51});
           });
-    });
 });
 
 });
 
 
 http.listen(3000,function(){
-    //console.log('listening at 3000');
+    console.log('listening at 3000');
 });

@@ -4,7 +4,7 @@
           <div class="row">
               <div class="col-md-8">
                   <h1 class="page-header">
-                      기준치:
+                      센서 세팅:
                         <%=data2.rule3%>
                       민감도:
                         <%=data2.range3%>
@@ -26,32 +26,7 @@
                             </div>
                         </div>
                     </div>
-                    <script>
-                    var rx_alaram = "<%=data3.alaram%>";
-                    var color = $("#color");
-                    var emoticon =$("#emoticon i");
-                    var size = $("#size");
-                    var text1 = $("#text");
-                    var alaram1 = $("#help");
-                    if(rx_alaram!=""){
-                      color.removeClass("panel-green");
-                      color.addClass("panel-red");
-                      emoticon.removeClass("fa fa-smile-o");
-                      emoticon.addClass("fa fa-meh-o");
-                      text1.text("경고");
-                      alaram1.text(rx_alaram);
-                    }
-
-                   if(rx_alaram==""){
-                    alaram1.text('');
-                    color.removeClass("panel-red");
-                    color.addClass("panel-green");
-                    emoticon.removeClass("fa fa-meh-o");
-                    emoticon.addClass("fa fa-smile-o");
-                    text1.text("양호");
-                    }
-
-                    </script>
+                  
                     <a id="BTN" style="cursor:pointer;">
                         <div class="panel-footer">
                             <span id="test7" class="pull-left"></span>
