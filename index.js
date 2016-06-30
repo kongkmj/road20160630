@@ -384,7 +384,7 @@ server.listen(11111,function () {
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-mongoose.connect("mongodb://test:test@ds011495.mlab.com:11495/dbtest");
+mongoose.connect("#");
 var db = mongoose.connection;
 db.once("open",function () {
   console.log("DB connected");
@@ -755,6 +755,6 @@ app.get('/realtimechart-5',function (req,res) {
 });
 
 
-http.listen(3000,function(){
-    console.log('listening at 3000');
+http.listen(80,function(){
+    console.log('listening at 80');
 });
