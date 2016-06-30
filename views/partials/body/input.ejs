@@ -17,24 +17,16 @@
 <h5>(1)번 Beacon</h5>
 
 
-<form id="ruleform1" name="ruleform1" method="POST" action="/input1">
+<form id="standardform1" name="standardform1" method="POST" action="/input1">
 <h5>기준값:
-<button type ="button" class="btn btn-primary" id="ruleid1" name="ruleid1" value="on" onclick="rule1()">기준값 적용</button> <!--버튼 사이즈는 bootstrap.css:3005-->
-<input type="hidden" id="rule1_1" name=rule1_1 value=""/>
-<script>
-function rule1() {
-var a =document.getElementById("ruleid1");
-console.log(a);
-var b =document.getElementById("rule1_1");
-console.log(b);
-b.value = a.value;
-var c= b.value;
-console.log(c);
-alert("기준값을 적용하였습니다.");
-}
-</script>
+<input type ="checkbox" style="width:25px;height:25px;" id="ruleid1" name="ruleid1" value="on" onclick="stsubmit1()"/>기준값 적용
 <i class=" fa fa-long-arrow-right"></i>
-
+<script>
+  function stsubmit1() {
+      standardform1.submit();
+  }
+</script>
+</form>
 <%= data.rule1 %>
 </h5>
 <div id="test">
@@ -45,89 +37,44 @@ alert("기준값을 적용하였습니다.");
 
   <div>
     <h5>
+    <form id="ruleform1" name="ruleform1" method="POST" action="/input1">
     민감도 :
-    <button type ="button" class="btn btn-success" id="range1-1" name="range1-1" value="매우민감" onclick="level1_1()">매우민감</button>
-    <button type="button" class="btn btn-info"  id="range1-2" name="range1-2" value="민감" onclick="level1_2()">민감</button>
-    <button type ="button" class="btn btn-primary" id="range1-3" name="range1-3" value="보통" onclick="level1_3()">보통</button>
-    <button type ="button" class="btn btn-warning" id="range1-4" name="range1-4" value="둔감" onclick="level1_4()">둔감</button>
-    <button type ="button" class="btn btn-danger" id="range1-5" name="range1-5" value="매우둔감" onclick="level1_5()">매우둔감</button>
-    <button type ="button" class="btn btn-default" id="range1-submit" name="range1-submit" value="전송" onclick="sub1()">전송</button>
-    <input type="hidden" id="range1-6" name=range1 value=""/>
+    <input type ="radio" style="width:25px;height:25px;" id="range1-1" name="range1" value="매우민감"  onclick="rulesubmit1()"/>매우민감
+    <input type="radio" style="width:25px;height:25px;" id="range1-2" name="range1" value="민감"  onclick="rulesubmit1()"/>민감
+    <input type ="radio" style="width:25px;height:25px;" id="range1-3" name="range1" value="보통"   onclick="rulesubmit1()"/>보통
+    <input type ="radio" style="width:25px;height:25px;" id="range1-4" name="range1" value="둔감"  onclick="rulesubmit1()"/>둔감
+    <input type ="radio" style="width:25px;height:25px;" id="range1-5" name="range1" value="매우둔감"  onclick="rulesubmit1()"/>매우둔감
   </div>
-
   </h5>
-  </form>
   <script>
+    var dao = "<%=data.range1%>"
+    var check1_1 = document.getElementById("range1-1");
+    var check1_2 = document.getElementById("range1-2");
+    var check1_3 = document.getElementById("range1-3");
+    var check1_4 = document.getElementById("range1-4");
+    var check1_5 = document.getElementById("range1-5");
+    if(dao=="매우민감"){
+      check1_1.checked=true;
+    }
+    if(dao=="민감"){
+      check1_2.checked=true;
+    }
+    if(dao=="보통"){
+      check1_3.checked=true;
+    }
+    if(dao=="둔감"){
+      check1_4.checked=true;
+    }
+    if(dao=="매우둔감"){
+      check1_5.checked=true;
+    }
 
-  function level1_1() {
-  if($("#range1-6").val()!=""){
-    alert("민감도는 하나만 선택 할 수 있습니다.");
-  }
-  else{
-  var a =document.getElementById("range1-1");
-  var b =document.getElementById("range1-6");
-  b.value = a.value;
-  var c= b.value;
-  console.log(c);
-  }
-  }
-  function level1_2() {
-    if($("#range1-6").val()!=""){
-      alert("민감도는 하나만 선택 할 수 있습니다.");
+
+    function rulesubmit1() {
+      ruleform1.submit();
     }
-    else{
-  var a =document.getElementById("range1-2");
-  var b =document.getElementById("range1-6");
-  b.value = a.value;
-  var c= b.value;
-  console.log(c);
-}
-  }
-  function level1_3() {
-    if($("#range1-6").val()!=""){
-      alert("민감도는 하나만 선택 할 수 있습니다.");
-    }
-    else{
-  var a =document.getElementById("range1-3");
-  var b =document.getElementById("range1-6");
-  b.value = a.value;
-  var c= b.value;
-  console.log(c);
-}
-}
-function level1_4() {
-  if($("#range1-6").val()!=""){
-    alert("민감도는 하나만 선택 할 수 있습니다.");
-  }
-  else{
-  var a =document.getElementById("range1-4");
-  var b =document.getElementById("range1-6");
-  b.value = a.value;
-  var c= b.value;
-  console.log(c);
-  }
-}
-  function level1_5() {
-    if($("#range1-6").val()!=""){
-      alert("민감도는 하나만 선택 할 수 있습니다.");
-    }
-    else{
-  var a =document.getElementById("range1-5");
-  var b =document.getElementById("range1-6");
-  b.value = a.value;
-  var c= b.value;
-  console.log(c);
-}
-  }
-  function sub1() {
-    if($("#range1-6").val()==""){
-      alert("민감도를 적용하시오");
-    }
-    else{
-    document.getElementById("ruleform1").submit();
-  }
-  }
   </script>
+  </form>
   <!--
     <%=data.range1%>
   -->
@@ -137,24 +84,16 @@ function level1_4() {
   <div >
   <h5>(2)번 Beacon</h5>
 
-  <form id="ruleform2" name="ruleform2" method="POST" action="/input2">
+  <form id="standardform2" name="standardform2" method="POST" action="/input2">
   <h5>기준값:
-  <button type ="button" class="btn btn-primary" id="ruleid2" name="ruleid2" value="on" onclick="rule2()">기준값 적용</button> <!--버튼 사이즈는 bootstrap.css:3005-->
-  <input type="hidden" id="rule2_1" name=rule2_1 value=""/>
-  <script>
-  function rule2() {
-  var a =document.getElementById("ruleid2");
-  console.log(a);
-  var b =document.getElementById("rule2_1");
-  console.log(b);
-  b.value = a.value;
-  var c= b.value;
-  console.log(c);
-  alert("기준값을 적용하였습니다.");
-  }
-  </script>
+  <input type ="checkbox" style="width:25px;height:25px;" id="ruleid2" name="ruleid2" value="on" onclick="stsubmit2()"/>기준값 적용
   <i class=" fa fa-long-arrow-right"></i>
-
+  <script>
+    function stsubmit2() {
+        standardform2.submit();
+    }
+  </script>
+  </form>
   <%= data_2.rule2 %>
   </h5>
   <div id="test">
@@ -165,88 +104,42 @@ function level1_4() {
 
     <div>
       <h5>
+      <form id="ruleform2" name="ruleform2" method="POST" action="/input2">
       민감도 :
-      <button type ="button" class="btn btn-primary" id="range2-1" name="range2-1" value="매우민감" onclick="level2_1()">매우민감</button>
-      <button type="button" class="btn btn-primary"  id="range2-2" name="range2-2" value="민감" onclick="level2_2()">민감</button>
-      <button type ="button" class="btn btn-primary" id="range2-3" name="range2-3" value="보통" onclick="level2_3()">보통</button>
-      <button type ="button" class="btn btn-primary" id="range2-4" name="range2-4" value="둔감" onclick="level2_4()">둔감</button>
-      <button type ="button" class="btn btn-primary" id="range2-5" name="range2-5" value="매우둔감" onclick="level2_5()">매우둔감</button>
-      <button type ="button" class="btn btn-primary" id="range2-submit" name="range2-submit" value="전송" onclick="sub2()">전송</button>
-      <input type="hidden" id="range2-6" name=range2 value=""/>
+      <input type ="radio" style="width:25px;height:25px;" id="range2-1" name="range2" value="매우민감" onclick="rulesubmit2()"/>매우민감
+      <input type="radio" style="width:25px;height:25px;" id="range2-2" name="range2" value="민감" onclick="rulesubmit2()"/>민감
+      <input type ="radio" style="width:25px;height:25px;" id="range2-3" name="range2" value="보통" onclick="rulesubmit2()"/>보통
+      <input type ="radio" style="width:25px;height:25px;" id="range2-4" name="range2" value="둔감" onclick="rulesubmit2()"/>둔감
+      <input type ="radio" style="width:25px;height:25px;" id="range2-5" name="range2" value="매우둔감" onclick="rulesubmit2()"/>매우둔감
     </div>
-
     </h5>
-    </form>
     <script>
-    function level2_1() {
-      if($("#range2-6").val()!=""){
-        alert("민감도는 하나만 선택 할 수 있습니다.");
+    var dao2 = "<%=data_2.range2%>"
+    var check2_1 = document.getElementById("range2-1");
+    var check2_2 = document.getElementById("range2-2");
+    var check2_3 = document.getElementById("range2-3");
+    var check2_4 = document.getElementById("range2-4");
+    var check2_5 = document.getElementById("range2-5");
+    if(dao2=="매우민감"){
+      check2_1.checked=true;
+    }
+    if(dao2=="민감"){
+      check2_2.checked=true;
+    }
+    if(dao2=="보통"){
+      check2_3.checked=true;
+    }
+    if(dao2=="둔감"){
+      check2_4.checked=true;
+    }
+    if(dao2=="매우둔감"){
+      check2_5.checked=true;
+    }
+      function rulesubmit2() {
+        ruleform2.submit();
       }
-      else{
-    var a =document.getElementById("range2-1");
-    var b =document.getElementById("range2-6");
-    b.value = a.value;
-    var c= b.value;
-    console.log(c);
-  }
-    }
-    function level2_2() {
-      if($("#range2-6").val()!=""){
-        alert("민감도는 하나만 선택 할 수 있습니다.");
-      }
-      else{
-    var a =document.getElementById("range2-2");
-    var b =document.getElementById("range2-6");
-    b.value = a.value;
-    var c= b.value;
-    console.log(c);
-  }
-    }
-    function level2_3() {
-      if($("#range2-6").val()!=""){
-        alert("민감도는 하나만 선택 할 수 있습니다.");
-      }
-      else{
-    var a =document.getElementById("range2-3");
-    var b =document.getElementById("range2-6");
-    b.value = a.value;
-    var c= b.value;
-    console.log(c);
-  }
-  }
-  function level2_4() {
-    if($("#range2-6").val()!=""){
-      alert("민감도는 하나만 선택 할 수 있습니다.");
-    }
-    else{
-    var a =document.getElementById("range2-4");
-    var b =document.getElementById("range2-6");
-    b.value = a.value;
-    var c= b.value;
-    console.log(c);
-  }
-    }
-    function level2_5() {
-      if($("#range2-6").val()!=""){
-        alert("민감도는 하나만 선택 할 수 있습니다.");
-      }
-      else{
-    var a =document.getElementById("range2-5");
-    var b =document.getElementById("range2-6");
-    b.value = a.value;
-    var c= b.value;
-    console.log(c);
-  }
-    }
-    function sub2() {
-      if($("#range2-6").val()==""){
-        alert("민감도를 적용하시오");
-      }
-      else{
-      document.getElementById("ruleform2").submit();
-    }
-    }
     </script>
+    </form>
     <!--
       <%=data.range2%>
     -->
@@ -257,116 +150,63 @@ function level1_4() {
     <div >
       <h5>(3)번 Beacon</h5>
 
-      <form id="ruleform3" name="ruleform3" method="POST" action="/input3">
+      <form id="standardform3" name="standardform3" method="POST" action="/input3">
       <h5>기준값:
-      <button type ="button" class="btn btn-primary" id="ruleid3" name="ruleid3" value="on" onclick="rule3()">기준값 적용</button> <!--버튼 사이즈는 bootstrap.css:3005-->
-      <input type="hidden" id="rule3_1" name=rule3_1 value=""/>
-      <script>
-      function rule3() {
-      var a =document.getElementById("ruleid3");
-      console.log(a);
-      var b =document.getElementById("rule3_1");
-      console.log(b);
-      b.value = a.value;
-      var c= b.value;
-      console.log(c);
-      alert("기준값을 적용하였습니다.");
-      }
-      </script>
+      <input type ="checkbox" style="width:25px;height:25px;" id="ruleid3" name="ruleid3" value="on" onclick="stsubmit3()"/>기준값 적용
       <i class=" fa fa-long-arrow-right"></i>
-
+      <script>
+        function stsubmit3() {
+            standardform3.submit();
+        }
+      </script>
+      </form>
       <%= data_3.rule3 %>
       </h5>
-    <div id="test">
+      <div id="test">
 
-    </div>
-
-    <div class="form-group">
-
-      <div>
-        <h5>
-        민감도 :
-        <button type ="button" class="btn btn-primary" id="range3-1" name="range3-1" value="매우민감" onclick="level3_1()">매우민감</button>
-        <button type="button" class="btn btn-primary"  id="range3-2" name="range3-2" value="민감" onclick="level3_2()">민감</button>
-        <button type ="button" class="btn btn-primary" id="range3-3" name="range3-3" value="보통" onclick="level3_3()">보통</button>
-        <button type ="button" class="btn btn-primary" id="range3-4" name="range3-4" value="둔감" onclick="level3_4()">둔감</button>
-        <button type ="button" class="btn btn-primary" id="range3-5" name="range3-5" value="매우둔감" onclick="level3_5()">매우둔감</button>
-        <button type ="button" class="btn btn-primary" id="range3-submit" name="range3-submit" value="전송" onclick="sub3()">전송</button>
-        <input type="hidden" id="range3-6" name=range3 value=""/>
       </div>
 
-      </h5>
-      </form>
-      <script>
-      function level3_1() {
-        if($("#range3-6").val()!=""){
-          alert("민감도는 하나만 선택 할 수 있습니다.");
+      <div class="form-group">
+
+        <div>
+          <h5>
+          <form id="ruleform3" name="ruleform3" method="POST" action="/input3">
+          민감도 :
+          <input type ="radio" style="width:25px;height:25px;" id="range3-1" name="range3" value="매우민감" onclick="rulesubmit3()"/>매우민감
+          <input type="radio" style="width:25px;height:25px;" id="range3-2" name="range3" value="민감" onclick="rulesubmit3()"/>민감
+          <input type ="radio" style="width:25px;height:25px;" id="range3-3" name="range3" value="보통" onclick="rulesubmit3()"/>보통
+          <input type ="radio" style="width:25px;height:25px;" id="range3-4" name="range3" value="둔감" onclick="rulesubmit3()"/>둔감
+          <input type ="radio" style="width:25px;height:25px;" id="range3-5" name="range3" value="매우둔감" onclick="rulesubmit3()"/>매우둔감
+        </div>
+        </h5>
+        <script>
+        var dao3 = "<%=data_3.range3%>"
+
+        var check3_1 = document.getElementById("range3-1");
+        var check3_2 = document.getElementById("range3-2");
+        var check3_3 = document.getElementById("range3-3");
+        var check3_4 = document.getElementById("range3-4");
+        var check3_5 = document.getElementById("range3-5");
+        if(dao3=="매우민감"){
+          check3_1.checked=true;
         }
-        else{
-      var a =document.getElementById("range3-1");
-      var b =document.getElementById("range3-6");
-      b.value = a.value;
-      var c= b.value;
-      console.log(c);
-    }
-      }
-      function level3_2() {
-        if($("#range3-6").val()!=""){
-          alert("민감도는 하나만 선택 할 수 있습니다.");
+        if(dao3=="민감"){
+          check3_2.checked=true;
         }
-        else{
-      var a =document.getElementById("range3-2");
-      var b =document.getElementById("range3-6");
-      b.value = a.value;
-      var c= b.value;
-      console.log(c);
-    }
-      }
-      function level3_3() {
-        if($("#range3-6").val()!=""){
-          alert("민감도는 하나만 선택 할 수 있습니다.");
+        if(dao3=="보통"){
+          check3_3.checked=true;
         }
-        else{
-      var a =document.getElementById("range3-3");
-      var b =document.getElementById("range3-6");
-      b.value = a.value;
-      var c= b.value;
-      console.log(c);
-    }
-    }
-    function level3_4() {
-      if($("#range3-6").val()!=""){
-        alert("민감도는 하나만 선택 할 수 있습니다.");
-      }
-      else{
-      var a =document.getElementById("range3-4");
-      var b =document.getElementById("range3-6");
-      b.value = a.value;
-      var c= b.value;
-      console.log(c);
-    }
-      }
-      function level3_5() {
-        if($("#range3-6").val()!=""){
-          alert("민감도는 하나만 선택 할 수 있습니다.");
+        if(dao3=="둔감"){
+          check3_4.checked=true;
         }
-        else{
-      var a =document.getElementById("range3-5");
-      var b =document.getElementById("range3-6");
-      b.value = a.value;
-      var c= b.value;
-      console.log(c);
-    }
-      }
-      function sub3() {
-        if($("#range1-6").val()==""){
-          alert("민감도를 적용하시오");
+        if(dao3=="매우둔감"){
+          check3_5.checked=true;
         }
-        else{
-        document.getElementById("ruleform3").submit();
-      }
-      }
-      </script>
+          function rulesubmit3() {
+            ruleform3.submit();
+          }
+        </script>
+        </form>
       <!--
         <%=data.range3%>
       -->
@@ -378,24 +218,17 @@ function level1_4() {
       <div >
       <h5>(4)번 Beacon</h5>
 
-      <form id="ruleform4" name="ruleform4" method="POST" action="/input4">
+      <form id="standardform4" name="standardform4" method="POST" action="/input4">
       <h5>기준값:
-      <button type ="button" class="btn btn-primary" id="ruleid4" name="ruleid4" value="on" onclick="rule4()">기준값 적용</button> <!--버튼 사이즈는 bootstrap.css:3005-->
-      <input type="hidden" id="rule4_1" name=rule4_1 value=""/>
-      <script>
-      function rule4() {
-      var a =document.getElementById("ruleid4");
-      console.log(a);
-      var b =document.getElementById("rule4_1");
-      console.log(b);
-      b.value = a.value;
-      var c= b.value;
-      console.log(c);
-      alert("기준값을 적용하였습니다.");
-      }
-      </script>
+      <input type ="checkbox" style="width:25px;height:25px;" id="ruleid4" name="ruleid4" value="on" onclick="stsubmit4()"/>기준값 적용
       <i class=" fa fa-long-arrow-right"></i>
+      <script>
 
+        function stsubmit4() {
+            standardform4.submit();
+        }
+      </script>
+      </form>
       <%= data_4.rule4 %>
       </h5>
       <div id="test">
@@ -406,88 +239,43 @@ function level1_4() {
 
         <div>
           <h5>
+          <form id="ruleform4" name="ruleform4" method="POST" action="/input4">
           민감도 :
-          <button type ="button" class="btn btn-primary" id="range4-1" name="range4-1" value="매우민감" onclick="level4_1()">매우민감</button>
-          <button type="button" class="btn btn-primary"  id="range4-2" name="range4-2" value="민감" onclick="level4_2()">민감</button>
-          <button type ="button" class="btn btn-primary" id="range4-3" name="range4-3" value="보통" onclick="level4_3()">보통</button>
-          <button type ="button" class="btn btn-primary" id="range4-4" name="range4-4" value="둔감" onclick="level4_4()">둔감</button>
-          <button type ="button" class="btn btn-primary" id="range4-5" name="range4-5" value="매우둔감" onclick="level4_5()">매우둔감</button>
-          <button type ="button" class="btn btn-primary" id="range4-submit" name="range4-submit" value="전송" onclick="sub4()">전송</button>
-          <input type="hidden" id="range4-6" name=range4 value=""/>
+          <input type ="radio" style="width:25px;height:25px;" id="range4-1" name="range4" value="매우민감" onclick="rulesubmit4()"/>매우민감
+          <input type="radio" style="width:25px;height:25px;" id="range4-2" name="range4" value="민감" onclick="rulesubmit4()"/>민감
+          <input type ="radio" style="width:25px;height:25px;" id="range4-3" name="range4" value="보통" onclick="rulesubmit4()"/>보통
+          <input type ="radio" style="width:25px;height:25px;" id="range4-4" name="range4" value="둔감" onclick="rulesubmit4()"/>둔감
+          <input type ="radio" style="width:25px;height:25px;" id="range4-5" name="range4" value="매우둔감" onclick="rulesubmit4()"/>매우둔감
         </div>
-
         </h5>
-        </form>
         <script>
-        function level4_1() {
-          if($("#range4-6").val()!=""){
-            alert("민감도는 하나만 선택 할 수 있습니다.");
+        var dao4 = "<%=data_4.range4%>"
+
+        var check4_1 = document.getElementById("range4-1");
+        var check4_2 = document.getElementById("range4-2");
+        var check4_3 = document.getElementById("range4-3");
+        var check4_4 = document.getElementById("range4-4");
+        var check4_5 = document.getElementById("range4-5");
+        if(dao4=="매우민감"){
+          check4_1.checked=true;
+        }
+        if(dao4=="민감"){
+          check4_2.checked=true;
+        }
+        if(dao4=="보통"){
+          check4_3.checked=true;
+        }
+        if(dao4=="둔감"){
+          check4_4.checked=true;
+        }
+        if(dao4=="매우둔감"){
+          check4_5.checked=true;
+        }
+          function rulesubmit4() {
+            ruleform4.submit();
           }
-          else{
-        var a =document.getElementById("range4-1");
-        var b =document.getElementById("range4-6");
-        b.value = a.value;
-        var c= b.value;
-        console.log(c);
-      }
-        }
-        function level4_2() {
-          if($("#range4-6").val()!=""){
-            alert("민감도는 하나만 선택 할 수 있습니다.");
-          }
-          else{
-        var a =document.getElementById("range4-2");
-        var b =document.getElementById("range4-6");
-        b.value = a.value;
-        var c= b.value;
-        console.log(c);
-      }
-        }
-        function level4_3() {
-          if($("#range4-6").val()!=""){
-            alert("민감도는 하나만 선택 할 수 있습니다.");
-          }
-          else{
-        var a =document.getElementById("range4-3");
-        var b =document.getElementById("range4-6");
-        b.value = a.value;
-        var c= b.value;
-        console.log(c);
-      }
-      }
-      function level4_4() {
-        if($("#range4-6").val()!=""){
-          alert("민감도는 하나만 선택 할 수 있습니다.");
-        }
-        else{
-        var a =document.getElementById("range4-4");
-        var b =document.getElementById("range4-6");
-        b.value = a.value;
-        var c= b.value;
-        console.log(c);
-      }
-        }
-        function level4_5() {
-          if($("#range4-6").val()!=""){
-            alert("민감도는 하나만 선택 할 수 있습니다.");
-          }
-          else{
-        var a =document.getElementById("range4-5");
-        var b =document.getElementById("range4-6");
-        b.value = a.value;
-        var c= b.value;
-        console.log(c);
-      }
-        }
-        function sub4() {
-          if($("#range1-6").val()==""){
-            alert("민감도를 적용하시오");
-          }
-          else{
-          document.getElementById("ruleform4").submit();
-        }
-        }
         </script>
+        </form>
         <!--
           <%=data.range4%>
         -->
@@ -498,24 +286,16 @@ function level1_4() {
         <div >
         <h5>(5)번 Beacon</h5>
 
-        <form id="ruleform5" name="ruleform5" method="POST" action="/input5">
+        <form id="standardform5" name="standardform5" method="POST" action="/input5">
         <h5>기준값:
-        <button type ="button" class="btn btn-primary" id="ruleid5" name="ruleid5" value="on" onclick="rule5()">기준값 적용</button> <!--버튼 사이즈는 bootstrap.css:3005-->
-        <input type="hidden" id="rule5_1" name=rule5_1 value=""/>
-        <script>
-        function rule5() {
-        var a =document.getElementById("ruleid5");
-        console.log(a);
-        var b =document.getElementById("rule5_1");
-        console.log(b);
-        b.value = a.value;
-        var c= b.value;
-        console.log(c);
-        alert("기준값을 적용하였습니다.");
-        }
-        </script>
+        <input type ="checkbox" style="width:25px;height:25px;" id="ruleid5" name="ruleid5" value="on" onclick="stsubmit5()"/>기준값 적용
         <i class=" fa fa-long-arrow-right"></i>
-
+        <script>
+          function stsubmit5() {
+              standardform5.submit();
+          }
+        </script>
+        </form>
         <%= data_5.rule5 %>
         </h5>
         <div id="test">
@@ -526,88 +306,43 @@ function level1_4() {
 
           <div>
             <h5>
+            <form id="ruleform5" name="ruleform5" method="POST" action="/input5">
             민감도 :
-            <button type ="button" class="btn btn-primary" id="range5-1" name="range5-1" value="매우민감" onclick="level5_1()">매우민감</button>
-            <button type="button" class="btn btn-primary"  id="range5-2" name="range5-2" value="민감" onclick="level5_2()">민감</button>
-            <button type ="button" class="btn btn-primary" id="range5-3" name="range5-3" value="보통" onclick="level5_3()">보통</button>
-            <button type ="button" class="btn btn-primary" id="range5-4" name="range5-4" value="둔감" onclick="level5_4()">둔감</button>
-            <button type ="button" class="btn btn-primary" id="range5-5" name="range5-5" value="매우둔감" onclick="level5_5()">매우둔감</button>
-            <button type ="button" class="btn btn-primary" id="range5-submit" name="range5-submit" value="전송" onclick="sub5()">전송</button>
-            <input type="hidden" id="range5-6" name=range5 value=""/>
+            <input type ="radio" style="width:25px;height:25px;" id="range5-1" name="range5" value="매우민감" onclick="rulesubmit5()"/>매우민감
+            <input type="radio" style="width:25px;height:25px;" id="range5-2" name="range5" value="민감" onclick="rulesubmit5()"/>민감
+            <input type ="radio" style="width:25px;height:25px;" id="range5-3" name="range5" value="보통" onclick="rulesubmit5()"/>보통
+            <input type ="radio" style="width:25px;height:25px;" id="range5-4" name="range5" value="둔감" onclick="rulesubmit5()"/>둔감
+            <input type ="radio" style="width:25px;height:25px;" id="range5-5" name="range5" value="매우둔감" onclick="rulesubmit5()"/>매우둔감
           </div>
-
           </h5>
-          </form>
           <script>
-          function level5_1() {
-            if($("#range5-6").val()!=""){
-              alert("민감도는 하나만 선택 할 수 있습니다.");
+          var dao5 = "<%=data_5.range5%>"
+
+          var check5_1 = document.getElementById("range5-1");
+          var check5_2 = document.getElementById("range5-2");
+          var check5_3 = document.getElementById("range5-3");
+          var check5_4 = document.getElementById("range5-4");
+          var check5_5 = document.getElementById("range5-5");
+          if(dao5=="매우민감"){
+            check5_1.checked=true;
+          }
+          if(dao5=="민감"){
+            check5_2.checked=true;
+          }
+          if(dao5=="보통"){
+            check5_3.checked=true;
+          }
+          if(dao5=="둔감"){
+            check5_4.checked=true;
+          }
+          if(dao5=="매우둔감"){
+            check5_5.checked=true;
+          }
+            function rulesubmit5() {
+              ruleform5.submit();
             }
-            else{
-          var a =document.getElementById("range5-1");
-          var b =document.getElementById("range5-6");
-          b.value = a.value;
-          var c= b.value;
-          console.log(c);
-        }
-          }
-          function level5_2() {
-            if($("#range5-6").val()!=""){
-              alert("민감도는 하나만 선택 할 수 있습니다.");
-            }
-            else{
-          var a =document.getElementById("range5-2");
-          var b =document.getElementById("range5-6");
-          b.value = a.value;
-          var c= b.value;
-          console.log(c);
-        }
-          }
-          function level5_3() {
-            if($("#range5-6").val()!=""){
-              alert("민감도는 하나만 선택 할 수 있습니다.");
-            }
-            else{
-          var a =document.getElementById("range5-3");
-          var b =document.getElementById("range5-6");
-          b.value = a.value;
-          var c= b.value;
-          console.log(c);
-        }
-        }
-        function level5_4() {
-          if($("#range5-6").val()!=""){
-            alert("민감도는 하나만 선택 할 수 있습니다.");
-          }
-          else{
-          var a =document.getElementById("range5-4");
-          var b =document.getElementById("range5-6");
-          b.value = a.value;
-          var c= b.value;
-          console.log(c);
-        }
-          }
-          function level5_5() {
-            if($("#range5-6").val()!=""){
-              alert("민감도는 하나만 선택 할 수 있습니다.");
-            }
-            else{
-          var a =document.getElementById("range5-5");
-          var b =document.getElementById("range5-6");
-          b.value = a.value;
-          var c= b.value;
-          console.log(c);
-        }
-          }
-          function sub5() {
-            if($("#range1-6").val()==""){
-              alert("민감도를 적용하시오");
-            }
-            else{
-            document.getElementById("ruleform5").submit();
-          }
-          }
           </script>
+          </form>
           <!--
             <%=data.range5%>
           -->

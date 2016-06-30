@@ -34,55 +34,12 @@
                         <div class="panel-footer">
                             <span id="test7" class="pull-left"></span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                            <div id="help"class="clearfix">
-
-                              <%=data3.alaram%>
-
-                            </div>
+                            <div id="help"class="clearfix"></div>
                         </div>
                     </a>
 
 
-                    <script>
 
-                    var rx_alaram = "<%=data3.alaram%>";
-
-
-                    var color = $("#color");
-                    var emoticon =$("#emoticon i");
-                    var size = $("#size");
-                    var text1 = $("#text");
-                    var alaram1 = $("#help");
-
-
-                    var a =document.getElementById("text");
-                    console.log(a);
-                    console.log(text1.text());
-
-
-                    if(rx_alaram!=""){
-
-                      color.removeClass("panel-green");
-                      color.addClass("panel-red");
-                      emoticon.removeClass("fa fa-smile-o");
-                      emoticon.addClass("fa fa-meh-o");
-                      text1.text("경고");
-                      alaram1.text(rx_alaram);
-
-                    }
-                   if(rx_alaram==""){
-
-                    alaram1.text('');
-                    color.removeClass("panel-red");
-                    color.addClass("panel-green");
-                    emoticon.removeClass("fa fa-meh-o");
-                    emoticon.addClass("fa fa-smile-o");
-                    text1.text("양호");
-
-                    }
-
-
-                    </script>
 
                 </div>
             </div>
@@ -213,27 +170,46 @@
 
 
 <script src="/socket.io/socket.io.js"></script>
+
+
 <script>
 
 var socket = io.connect("http://localhost:3000");
-
 var audio = new Audio();
 audio.src='/audio/alert.mp3';
 var alert_cnt=0;
-//var rx_alaram = "<%= data3.alaram %>";
+
 var color = $("#color");
 var emoticon =$("#emoticon i");
 var size = $("#size");
 var text1 = $("#text");
 var alaram1 = $("#help");
+socket.on('news',function (alaram) {
+  console.log(alaram);
+  if(alaram!=""){
+    //alert_cnt=1;
+    color.removeClass("panel-green");
+    color.addClass("panel-red");
+    emoticon.removeClass("fa fa-smile-o");
+    emoticon.addClass("fa fa-meh-o");
+    text1.text("경고");
+    alaram1.text(alaram);
+    audio.play();
 
+  }
 
-/* audio  문제
-var request = "DBdata";
-console.log(request);
-socket.emit("request",request);
-console.log(request);
-*/
+ if(alaram==""){
+  // alert_cnt=0;
+  alaram1.text('');
+  color.removeClass("panel-red");
+  color.addClass("panel-green");
+  emoticon.removeClass("fa fa-meh-o");
+  emoticon.addClass("fa fa-smile-o");
+  text1.text("양호");
+  audio.pause();
+  }
+})
+
 
 
 socket.on('chat message',function (recieveArray,alaram) {
